@@ -1,6 +1,6 @@
 # Supabase Email Sender
 
-This Python script automates the process of sending emails to users stored in a Supabase database. It's designed to send emails in batches with configurable delays to avoid triggering spam filters.
+This Python script automates the process of sending emails to users stored in a Supabase database. It's designed to send emails in batches with configurable delays to avoid triggering spam filters, and can resume from where it left off if interrupted.
 
 ## Features
 
@@ -8,6 +8,7 @@ This Python script automates the process of sending emails to users stored in a 
 - Sends emails using Gmail SMTP
 - Implements batch sending with configurable delays
 - Includes error handling and logging
+- Resumes from the last sent email if the script is interrupted
 
 ## Prerequisites
 
@@ -62,7 +63,9 @@ python main.py
 The script will:
 1. Connect to your Supabase database
 2. Fetch email addresses
-3. Send emails in batches with configurable delays
+3. Check the last sent email from the log files
+4. Resume sending emails from where it left off
+5. Send emails in batches with configurable delays
 
 ## Configuration
 
@@ -74,4 +77,12 @@ You can adjust the following parameters in the `main()` function:
 
 ## Logging
 
-The script logs its activities to the console. You can adjust the logging level in the `logging.basicConfig()` call if needed.
+The script logs its activities to the console and creates log files in the `/log` directory. Each log file contains up to 100 sent emails and is named with a timestamp (e.g., `sent_emails_20230515_120000.log`). These log files are used to track progress and allow the script to resume from where it left off if interrupted.
+
+## Error Handling
+
+The script includes error handling for common issues such as SMTP authentication failures and connection problems. If an error occurs, it will be logged, and the script will attempt to continue with the next email.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
