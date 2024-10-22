@@ -86,3 +86,7 @@ The script includes error handling for common issues such as SMTP authentication
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
