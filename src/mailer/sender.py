@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import logging
 from utils.config import EMAIL_ADDRESS, EMAIL_PASSWORD
 from email_logging.email_logger import log_email
+from .email_template import create_email_message
 
 load_dotenv()
 
@@ -28,13 +29,7 @@ def send_email(to_email):
         smtplib.SMTPException: For other SMTP-related errors.
         Exception: For any other unexpected errors during the email sending process.
     """
-    msg = MIMEMultipart()
-    msg['From'] = EMAIL_ADDRESS
-    msg['To'] = to_email
-    msg['Subject'] = 'Your Subject Here'
-
-    body = 'Your email body here'
-    msg.attach(MIMEText(body, 'plain'))
+    msg = create_email_message(to_email)
 
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
