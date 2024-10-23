@@ -57,7 +57,7 @@ To use this script with Gmail, you need to create an App Password:
 Run the script using:
 
 ```bash
-python main.py
+python src/main.py
 ```
 
 The script will:
@@ -69,11 +69,11 @@ The script will:
 
 ## Configuration
 
-You can adjust the following parameters in the `main()` function:
+You can adjust the following parameters in `src/utils/config.py`:
 
-- `batch_size`: Number of emails to send in each batch (default: 10)
-- `delay_between_batches`: Delay between batches in seconds (default: 2 hours)
-- `delay_between_emails`: Delay between individual emails in seconds (default: 10)
+- `BATCH_SIZE`: Number of emails to send in each batch (default: 10)
+- `DELAY_BETWEEN_BATCHES`: Delay between batches in seconds (default: 2 hours)
+- `DELAY_BETWEEN_EMAILS`: Delay between individual emails in seconds (default: 10)
 
 ## Logging
 
