@@ -40,6 +40,38 @@ This Python script automates the process of sending emails to users stored in a 
    - EMAIL_ADDRESS: Your Gmail address
    - EMAIL_PASSWORD: Your Gmail App Password (see below for instructions)
 
+5. Customize the email template:
+   - The HTML email template is located at `src/mailer/templates/index.html`
+   - Modify this file to change the content and styling of the email
+
+To modify the email content:
+
+1. Edit the HTML template in `src/mailer/templates/index.html`
+2. Update the email subject in `src/mailer/email_template.py` if needed
+
+## Project Structure
+
+```
+root/
+├── src/
+│   ├── database/
+│   │   └── supabase_client.py
+│   ├── email_logging/
+│   │   └── email_logger.py
+│   ├── mailer/
+│   │   ├── sender.py
+│   │   ├── email_template.py
+│   │   └── templates/
+│   │       └── index.html
+│   ├── utils/
+│   │   └── config.py
+│   └── main.py
+├── .env
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
 ## Gmail App Password Setup
 
 To use this script with Gmail, you need to create an App Password:
