@@ -1,54 +1,52 @@
+import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from utils.config import EMAIL_ADDRESS
 
 def create_email_message(to_email):
+    """
+    Create an email message with HTML content.
+
+    This function generates a MIME multipart email message with HTML content
+    read from an external template file. It sets up the basic email structure
+    including subject, sender, and recipient.
+
+    Args:
+        to_email (str): The email address of the recipient.
+
+    Returns:
+        email.mime.multipart.MIMEMultipart: A fully formed email message object
+        ready to be sent.
+
+    Raises:
+        FileNotFoundError: If the HTML template file is not found.
+        IOError: If there's an error reading the HTML template file.
+
+    The function performs the following steps:
+    1. Creates a MIMEMultipart object for the email message.
+    2. Sets the email subject, sender (From), and recipient (To).
+    3. Reads the HTML content from a template file located at 
+       'templates/index.html' relative to this script's location.
+    4. Attaches the HTML content to the email message.
+
+    Note:
+        - The email subject is currently hardcoded and can be modified as needed.
+        - The sender's email address is taken from the EMAIL_ADDRESS config variable.
+        - The HTML template file must exist at the specified path for this function to work.
+
+    Example usage:
+        email_message = create_email_message("recipient@example.com")
+        # email_message can now be used with smtplib to send the email
+    """
     msg = MIMEMultipart('alternative')
     msg['Subject'] = 'Check Out Our New Service'
     msg['From'] = EMAIL_ADDRESS
     msg['To'] = to_email
 
-    html = """
-    <html>
-    <head>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                color: #333;
-            }
-            .container {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-                background-color: #f9f9f9;
-            }
-            h1 {
-                color: #2c3e50;
-            }
-            .cta-button {
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #3498db;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Check Out Our New Service!</h1>
-            <p>Dear User,</p>
-            <p>Thank you for joining our service. We're excited to have you on board!</p>
-            <p>To get started, please click the button below:</p>
-            <p><a href="https://alphabyte.co.jp/" class="cta-button">Get Started</a></p>
-            <p>If you have any questions, feel free to reply to this email.</p>
-            <p>Best regards,<br>Your Company Team</p>
-        </div>
-    </body>
-    </html>
-    """
+    # Read HTML content from file
+    template_path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
+    with open(template_path, 'r') as file:
+        html = file.read()
 
     msg.attach(MIMEText(html, 'html'))
     return msg
